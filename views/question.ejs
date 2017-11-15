@@ -1,0 +1,200 @@
+<div>
+<div class="content">
+    <% if(!question.forWard_author && !question.forWard_content){ %>
+    <div class="weibo-content">
+        <input type="text" name="question_id" value="<%= question._id %>" class="hide">
+        <div class="weibo-content-main">
+            <img class="weibo-avatar" src="<%= question.author.avatar %>"></img>
+            <div class="weibo-detail">
+                <div class="weibo-user-name"><a
+                            href="/center/<%= question.author.xm %>"><%= question.author.xm %></a></div>
+                <div class="weibo-time-ago"><%= question.create_time_ago() %></div>
+                <div class="weibo-text"><%= question.content %></div>
+                <ul class="weibo-picture">
+                    <% for(var i = 0;i < question.imgs.length;i++){ %>
+                    <li>
+                        <img src="<%= question.imgs[i] %>" alt="">
+                    </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+        <div class="weibo-content-btn">
+            <ul class="weibo-content-btn-nav">
+                <% if(user){ %>
+                <% if(question.follow_num.indexOf(user._id) == -1){ %>
+                <li class="weibo-btn-mark">
+                    <i class="fa fa-star"></i>
+                    收藏
+                </li>
+                <% }else{ %>
+                <li class="weibo-btn-mark">
+                    <i class="fa fa-star"></i>
+                    取消收藏
+                </li>
+                <% } %>
+                <% } %>
+                <li class="weibo-btn-relay forWard">
+                    <a href="javascript:void(0)">
+                        <i class="fa fa-reply"></i>
+                        转发</a>
+                </li>
+                <% if(question.click_num > 0){ %>
+                <li class="weibo-btn-reply weibo-btn-reply_reply" target=true>
+                    <a href="javescript:void(0)">
+                        <i class="fa fa-pencil-square"></i>
+                        <%= question.click_num %></a>
+                </li>
+                <% }else{ %>
+                <li class="weibo-btn-reply weibo-btn-reply_reply" target=true>
+                    <a href="javescript:void(0)">
+                        <i class="fa fa-pencil-square"></i>
+                        评论</a>
+                </li>
+                <% } %>
+                <% if(question.like_num.length > 0){ %>
+                <li class="weibo-btn-like">
+                    <i class="fa fa-thumbs-up"></i>
+                    <%= question.like_num.length %>
+                </li>
+                <% }else{ %>
+                <li class="weibo-btn-like">
+                    <i class="fa fa-thumbs-up"></i>
+                    赞
+                </li>
+                <% } %>
+            </ul>
+        </div>
+        <div class="forWard_div" target="true">
+            <input type="text" class="forWard_input" placeholder="请用一句话评论您所转发的微博">
+            <button class="forward_btn btn btn-info">转发</button>
+        </div>
+    </div>
+    <% }else{ %>
+    <div class="weibo-content">
+        <input type="text" name="question_id" value="<%= question._id %>" class="hide">
+        <div class="weibo-content-main">
+            <div><img class="weibo-avatar" src="<%= question.forWard_author.avatar %>"></img>
+                <div class="weibo-detail">
+                    <div class="weibo-user-name"><a
+                                href="/center/<%= question.forWard_author.xm %>"><%= question.forWard_author.xm %></a>
+                    </div>
+                    <div class="weibo-time-ago"><%= question.create_time_ago() %></div>
+                    <div class="weibo-text"><%= question.forWard_content %></div>
+                </div>
+                <div class="forWard_content">
+                    <a href="/centet/<%= question.author.xm %>">@<%= question.author.xm %></a>
+                    <p class="weibo-text"><%= question.content %></p>
+                    <ul class="weibo-picture">
+                        <% for(var i = 0;i < question.imgs.length;i++){ %>
+                        <li>
+                            <img src="<%= question.imgs[i] %>" alt="">
+                        </li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="weibo-content-btn">
+            <ul class="weibo-content-btn-nav">
+                <% if(user){ %>
+                <% if(question.follow_num.indexOf(user._id) == -1){ %>
+                <li class="weibo-btn-mark">
+                    <i class="fa fa-star"></i>
+                    收藏
+                </li>
+                <% }else{ %>
+                <li class="weibo-btn-mark">
+                    <i class="fa fa-star"></i>
+                    取消收藏
+                </li>
+                <% } %>
+                <% } %>
+                <li class="weibo-btn-relay forWard">
+                    <a href="javascript:void(0)">
+                        <i class="fa fa-reply"></i>
+                        转发</a>
+                </li>
+                <% if(question.click_num > 0){ %>
+                <li class="weibo-btn-reply weibo-btn-reply_reply" target=true>
+                    <a href="javescript:void(0)">
+                        <i class="fa fa-pencil-square"></i>
+                        <%= question.click_num %></a>
+                </li>
+                <% }else{ %>
+                <li class="weibo-btn-reply weibo-btn-reply_reply" target=true>
+                    <a href="javescript:void(0)">
+                        <i class="fa fa-pencil-square"></i>
+                        评论</a>
+                </li>
+                <% } %>
+                <% if(question.like_num.length > 0){ %>
+                <li class="weibo-btn-like">
+                    <i class="fa fa-thumbs-up"></i>
+                    <%= question.like_num.length %>
+                </li>
+                <% }else{ %>
+                <li class="weibo-btn-like">
+                    <i class="fa fa-thumbs-up"></i>
+                    赞
+                </li>
+                <% } %>
+            </ul>
+        </div>
+        <div class="forWard_div" target="true">
+            <input type="text" class="forWard_input" placeholder="请用一句话评论您所转发的微博">
+            <button class="forward_btn btn btn-info">转发</button>
+        </div>
+    </div>
+    <% } %>
+    <div class="reply allreply">
+        <img style="border-radius: 50%;border: 1px solid #ccc" src="<%= user.avatar %>" alt="">
+        <input type="text" class="reply_talk" name="/question/<%= question._id %>/reply">
+        <p><button id="reply_btn" class="btn btn-info">评论</button></p>
+    </div>
+    <div class="reply_content">
+        <ul class="addReply">
+            <li class="active">按时间</li>
+            <li>按热度</li>
+        </ul>
+        <% replys.forEach(function (replys) { %>
+        <div class="re_content">
+            <div style="margin-bottom: 10px" class="allreply" id="<%= replys._id %>">
+                <img style="border-radius: 50%;border: 1px solid #ccc" src="<%= replys.author.avatar %>" alt="">
+                <p class="re_name"><span><a href="/center/<%= replys.author.xm %>"><%=replys.author.xm %></a>：</span><span><%= replys.content %></span></p>
+                <span class="re_time"><%= replys.create_time_ago() %></span>
+                <p class="re_input">
+                    <span class="cursor reply_slide">回复</span>|
+                    <% if(replys.likes.length > 0){ %>
+                    <span class="reply_like cursor">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                        <%= replys.likes.length %>
+                    </span>
+                    <% }else{ %>
+                    <span class="reply_like cursor">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                        赞
+                    </span>
+                    <% } %>
+                </p><br>
+                <div class="slide_reply" target="true" style="display: none">
+                    <input type="text" name="target_id" value="<%= replys._id%>" class="hide">
+                    <input type="text" name="url" value="/question/<%= replys.question_id %>/comment" class="hide">
+                    <div style="margin-top: 10px" class="reply_div">
+                        <input name="" class="reply_input markdown" type="text">
+                        <button class="reply_btn commentBtn btn btn-info">评论</button>
+                    </div>
+                </div>
+            </div>
+            <input type="text" name="allComment" value="<%= replys._id %>" class="hide">
+            <% if(replys.comment_num > 0){%>
+            <a id="allComment" class="allCommentShow" style="margin-left: 45px" target="true" href="javascript:void(0)"><%= replys.comment_num %>条回复</a>
+            <% }else{ %>
+            <a id="allComment" class="allCommentShow" style="margin-left: 45px" target="true" href="javascript:void(0)">暂无回复</a>
+            <% } %>
+            <div class="showAllComment" style="display: none"></div>
+        </div>
+       <% }) %>
+    </div>
+</div>
+</div>

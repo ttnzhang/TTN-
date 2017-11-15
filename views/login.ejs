@@ -1,0 +1,33 @@
+<div class="content" ng-app="loginApp" ng-controller="loginController">
+    <div class="center">
+        <form name="loginForm" ng-submit="postForm()">
+        <img src="../images/logo.png" alt=""><br>
+        <p>账号：<input type="text" id="user" name="name" ng-model="formData.name" ng-pattern="/(^[a-zA-Z0-9_]{4,11}$)|(^(\w+)(\.\w+)*@(\w+)((\.\w+))+$)/" required></p>
+        <p style="height: 20px;font-size: 16px"><span ng-cloak ng-show="loginForm.name.$invalid && !loginForm.name.$pristine" class="text-danger">
+            <i class="fa fa-warning text-danger"></i>
+            账号格式不正确</span></p>
+        <p>密码：<input type="password" id="pw" name="password" ng-model="formData.password" ng-pattern="/(?!^\\d+$)(?!^[a-zA-Z]+$)(?!^[_#@]+$).{5,}/" ng-maxlength="12" required></p>
+            <p style="height: 20px;font-size: 16px">
+                <span class="text-danger" ng-cloak ng-show="loginForm.password.$invalid && !loginForm.password.$pristine">
+                <i class="fa fa-warning text-danger"></i>
+                密码格式不正确
+            </span>
+            </p>
+        <div class="checkbox"><input type="checkbox" required><span>记住密码</span></div>
+        <button type="submit" ng-disabled="loginForm.$invalid">登录</button>
+            <div style="margin-top:10px;height:20px;">
+                <div ng-cloak id="errorbox"  ng-show="error" class="alert alert-danger text-center" role="alert">
+                    {{ error }}
+                </div>
+            </div>
+        <div class="log_other">
+            <span><a href="#">忘记密码</a>
+            </span><br><br>
+            <span>没有账号</span><a href="/register">现在前往注册>></a><br><br>
+            <span>其他登录方式：</span>
+            <a href="#"><i class="fa fa-qq"></i></a>
+            <a href="#"><i class="fa fa-weixin"></i></a>
+        </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+.content{
+    padding-top: 20px;
+}
+.center{
+    width: 900px;
+    height: 550px;
+    margin: 0 auto;
+    background: white;
+    margin-bottom: 50px;
+    box-shadow: 5px 5px 5px #888888;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+.center img{
+    width: 300px;
+    height: 90px;
+    margin: 10px 0;
+    margin-bottom: 50px;
+}
+.center p input{
+    font-size: 16px;
+    padding-left: 6px;
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.center p{
+    margin-top: 5px;
+    font-size: 25px;
+}
+.center button{
+    width: 125px;
+    height: 35px;
+    margin-top: 10px;
+    background-color: coral;
+    opacity: 0.8;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    outline: none;
+    font-size: 19px;
+}
+.center button:hover{
+    background-color: coral;
+    opacity: 1;
+}
+.log_other{
+    width: 400px;
+    margin: 30px auto;
+    text-align: left;
+    font-size: 16px;
+}
+.log_other a,.log_other a:hover{
+    color: darkorange;
+}
+.log_other a i{
+    color: grey;
+}
+.checkbox{
+    font-size: 16px;
+    width: 300px;
+    text-align: left;
+    margin: 0 auto;
+}

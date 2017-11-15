@@ -1,0 +1,33 @@
+<% comments.forEach(function (comments) { %>
+<div class="comment allreply">
+    <input type="text" name="url" value="<%= comments.question_id %>" class="hide">
+    <input type="text" name="comment_id" value="<%= comments._id %>" class="hide">
+    <% if(comments.comment_target_id){ %>
+    <p class="co_name"><span><a><%= comments.author.xm %></a> 回复 <a href=""><%= comments.comment_target_id.xm %></a> ：</span><span><%= comments.content %></span></p>
+    <% }else{ %>
+    <p class="co_name"><span><a><%= comments.author.xm %></a>：</span><span><%= comments.content %></span></p>
+    <% } %>
+    <span class="co_time"><%= comments.create_time_ago() %></span>
+    <p class="co_input">
+        <span class="cursor comment_slide">回复</span>|
+        <% if(comments.likes.length > 0){ %>
+        <span class="cursor comment_likes">
+            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+            <%= comments.likes.length %>
+        </span>
+        <% }else{ %>
+        <span class="cursor comment_likes">
+            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+            赞
+        </span>
+        <% } %>
+    </p><br>
+    <div class="slide_comment" style="display: none" target="true">
+        <div style="margin-top: 10px;width: 600px">
+            <input type="text" name="<%= comments.author._id %>" class="comment_input markdown">
+            <input type="text" name="target_id" value="<%= reply._id %>" class="hide">
+            <button class="comment_btn commentBtn reply_btnn btn btn-info">评论</button>
+        </div>
+    </div>
+</div>
+<% }) %>

@@ -1,0 +1,648 @@
+<div class="container" ng-app="messageApp" ng-controller="messageController">
+    <div class="left-nav">
+        <div class="left-top nav-tabs">
+            <div class="left-nav-top-title">我的消息箱</div>
+            <div ng-click="read_at()" class="left-nav-top" read_reply="<%= userId %>" id="replyP" href='#tab1' data-toggle='tab'><span>@我的</span>
+                <% if(at != ''){ %>
+                <div id="reply"></div>
+                <% } %>
+            </div>
+            <div ng-click="read_reply()" id="replyP" read_reply="<%= userId %>" class="left-nav-top" href='#tab2' data-toggle='tab'><span>评论
+                    <% if(reply != ''){ %>
+                    <div id="reply"></div>
+                    <% } %>
+                </span></div>
+            <div ng-click="read_like()" class="left-nav-top" id="replyP" read_reply="<%= userId %>" href='#tab3' data-toggle='tab'><span>赞
+                    <% if(like != ''){ %>
+                    <div id="reply"></div>
+                    <% } %>
+                </span></div>
+            <div ng-click="read_comment()" id="replyP" read_reply="<%= userId %>" class="left-nav-top" href='#tab4'  data-toggle='tab'><span>
+                    回复
+                    <% if(comment != ''){ %>
+                    <div id="reply"></div>
+                    <% } %>
+                </span></div>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class='tab-content'>
+            <div class='tab-pane fade in active' id='tab1'>
+                <% if(at == ''){ %>
+                <div class="noNewMessage">
+                    <a href="/" class="tips">没有新消息</br>去首页看看吧！</a>
+                </div>
+                <% }else{ %>
+                <% at.forEach(function (at) { %>
+
+                <div class="weibo-content">
+                    <input type="text" name="question_id" value="<%= at.question_id._id %>" class="hide">
+                    <div class="weibo-content-main">
+                        <img class="weibo-avatar" src="<%= at.author_id.avatar %>"></img>
+                        <div class="weibo-detail">
+                            <div class="weibo-user-name"><a href="/center/<%= at.author_id.xm %>"><%= at.author_id.xm %></a></div>
+                            <div class="weibo-time-ago"><%= at.question_id.create_time_ago() %></div>
+                            <div class="weibo-text"><%= at.question_id.content %></div>
+                            <ul class="weibo-picture">
+                                <% for(var i= 0;i<at.question_id.imgs.length;i++){ %>
+                                <li>
+                                    <img src="<%= at.question_id.imgs[i] %>" alt="">
+                                </li>
+                                <% } %>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="weibo-content-btn">
+                        <ul class="weibo-content-btn-nav">
+                            <% if(at.question_id.follow_num.indexOf(user._id) == -1){ %>
+                            <li class="weibo-btn-mark">
+                                <i class="fa fa-star"></i>
+                                收藏
+                            </li>
+                            <% }else{ %>
+                            <li class="weibo-btn-mark">
+                                <i class="fa fa-star"></i>
+                                取消收藏
+                            </li>
+                            <% } %>
+                            <li class="weibo-btn-relay forWard">
+                                <a href="javascript:void(0)">
+                                    <i class="fa fa-reply"></i>
+                                    转发</a>
+                            </li>
+                            <% if(at.question_id.click_num > 0){ %>
+                            <li class="weibo-btn-reply weibo-btn-reply_reply" target=true>
+                                <a href="javescript:void(0)">
+                                    <i class="fa fa-pencil-square"></i>
+                                    <%= at.question_id.click_num %></a>
+                            </li>
+                            <% }else{ %>
+                            <li class="weibo-btn-reply weibo-btn-reply_reply" target=true>
+                                <a href="javescript:void(0)">
+                                    <i class="fa fa-pencil-square"></i>
+                                    评论</a>
+                            </li>
+                            <% } %>
+                            <% if(at.question_id.like_num.length > 0){ %>
+                            <li class="weibo-btn-like">
+                                <i class="fa fa-thumbs-up"></i>
+                                <%= at.question_id.like_num.length %>
+                            </li>
+                            <% }else{ %>
+                            <li class="weibo-btn-like">
+                                <i class="fa fa-thumbs-up"></i>
+                                赞
+                            </li>
+                            <% } %>
+                        </ul>
+                    </div>
+                    <div class="forWard_div" target="true">
+                        <input type="text" class="forWard_input" placeholder="请用一句话评论您所转发的微博">
+                        <button class="forward_btn btn btn-info">转发</button>
+                    </div>
+                    <div class="showSectionReply" style="display: none"></div>
+                    <% if(at.reply_id != null && at.comment_id == null){ %>
+                    <div class="re_content message_re_content">
+                        <div style="margin-bottom: 10px" class="allreply">
+                            <img style="border-radius: 50%;border: 1px solid #ccc" src="<%= at.author_id.avatar %>" alt="">
+                            <p class="re_name"><span><a href="/center/<%= at.author_id.xm %>"><%= at.author_id.xm %></a>：</span><span><%= at.reply_id.content %></span></p>
+                            <span class="re_time"><%= at.reply_id.create_time_ago() %></span>
+                            <p class="re_input">
+                                <span class="cursor reply_slide">回复</span>|
+                                <% if(at.reply_id.likes.length > 0){ %>
+                                <span class="reply_like cursor">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                    <%= at.reply_id.likes.length %>
+                    </span>
+                                <% }else{ %>
+                                <span class="reply_like cursor">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                        赞
+                    </span>
+                                <% } %>
+                            </p><br>
+                            <div class="slide_reply" target="true" style="display: none">
+                                <input type="text" name="target_id" value="<%= at.reply_id._id%>" class="hide">
+                                <input type="text" name="url" value="/question/<%= at.reply_id.question_id %>/comment" class="hide">
+                                <p>
+                                    <input name="" class="reply_input markdown" type="text">
+                                    <button class="reply_btn commentBtn btn bnt-info">评论</button>
+                                </p>
+                                <span class="glyphicon glyphicon-piggy-bank">表情</span>
+                            </div>
+                        </div>
+                        <input type="text" name="allComment" value="<%= at.reply_id._id %>" class="hide">
+                        <% if(at.reply_id.comment_num > 0){%>
+                        <a id="allComment" class="allCommentShow" style="margin-left: 45px" target="true" href="javascript:void(0)"><%= at.reply_id.comment_num %>条回复</a>
+                        <% } %>
+                        <div class="showAllComment" style="display: none"></div>
+                    </div>
+                    <% } %>
+                    <% if(at.comment_id != null){ %>
+                    <div class="re_content message_re_content">
+                        <div style="margin-bottom: 10px" class="allreply">
+                            <img style="border-radius: 50%;border: 1px solid #ccc" src="<%= at.author_id.avatar %>" alt="">
+                            <p class="re_name"><span><a href="/center/<%= at.author_id.xm %>"><%= at.author_id.xm %></a>：</span><span><%= at.reply_id.content %></span></p>
+                            <span class="re_time"><%= at.reply_id.create_time_ago() %></span>
+                            <p class="re_input">
+                                <span class="cursor reply_slide">回复</span>|
+                                <% if(at.reply_id.likes.length > 0){ %>
+                                <span class="reply_like cursor">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                    <%= at.reply_id.likes.length %>
+                    </span>
+                                <% }else{ %>
+                                <span class="reply_like cursor">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                        赞
+                    </span>
+                                <% } %>
+                            </p><br>
+                            <div class="slide_reply" target="true" style="display: none">
+                                <input type="text" name="target_id" value="<%= at.reply_id._id%>" class="hide">
+                                <input type="text" name="url" value="/question/<%= at.reply_id.question_id %>/comment" class="hide">
+                                <p>
+                                    <input name="" class="reply_input markdown" type="text">
+                                    <button class="reply_btn commentBtn btn btn-info">评论</button>
+                                </p>
+                            </div>
+                        </div>
+                        <input type="text" name="allComment" value="<%= at.reply_id._id %>" class="hide">
+                        <% if(at.reply_id.comment_num > 0){%>
+                        <a id="allComment" class="allCommentShow" style="margin-left: 45px" target="true" href="javascript:void(0)"><%= at.reply_id.comment_num %>条回复</a>
+                        <% } %>
+                        <div class="showAllComment" style="display: none"></div>
+                    </div>
+                    <% } %>
+                </div>
+                <% }) %>
+                <% } %>
+                <% ats.forEach(function (at) { %>
+
+                <div class="weibo-content">
+                    <input type="text" name="question_id" value="<%= at.question_id._id %>" class="hide">
+                    <div class="weibo-content-main">
+                        <img class="weibo-avatar" src="<%= at.author_id.avatar %>"></img>
+                        <div class="weibo-detail">
+                            <div class="weibo-user-name"><a href="/center/<%= at.author_id.xm %>"><%= at.author_id.xm %></a></div>
+                            <div class="weibo-time-ago"><%= at.question_id.create_time_ago() %></div>
+                            <div class="weibo-text"><%= at.question_id.content %></div>
+                            <ul class="weibo-picture">
+                                <% for(var i= 0;i<at.question_id.imgs.length;i++){ %>
+                                <li>
+                                    <img src="<%= at.question_id.imgs[i] %>" alt="">
+                                </li>
+                                <% } %>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="weibo-content-btn">
+                        <ul class="weibo-content-btn-nav">
+                            <% if(at.question_id.follow_num.indexOf(user._id) == -1){ %>
+                            <li class="weibo-btn-mark">
+                                <i class="fa fa-star"></i>
+                                收藏
+                            </li>
+                            <% }else{ %>
+                            <li class="weibo-btn-mark">
+                                <i class="fa fa-star"></i>
+                                取消收藏
+                            </li>
+                            <% } %>
+                            <li class="weibo-btn-relay forWard">
+                                <a href="javascript:void(0)">
+                                    <i class="fa fa-reply"></i>
+                                    转发</a>
+                            </li>
+                            <% if(at.question_id.click_num > 0){ %>
+                            <li class="weibo-btn-reply weibo-btn-reply_reply" target=true>
+                                <a href="javescript:void(0)">
+                                    <i class="fa fa-pencil-square"></i>
+                                    <%= at.question_id.click_num %></a>
+                            </li>
+                            <% }else{ %>
+                            <li class="weibo-btn-reply weibo-btn-reply_reply" target=true>
+                                <a href="javescript:void(0)">
+                                    <i class="fa fa-pencil-square"></i>
+                                    评论</a>
+                            </li>
+                            <% } %>
+                            <% if(at.question_id.like_num.length > 0){ %>
+                            <li class="weibo-btn-like">
+                                <i class="fa fa-thumbs-up"></i>
+                                <%= at.question_id.like_num.length %>
+                            </li>
+                            <% }else{ %>
+                            <li class="weibo-btn-like">
+                                <i class="fa fa-thumbs-up"></i>
+                                赞
+                            </li>
+                            <% } %>
+                        </ul>
+                    </div>
+                    <div class="forWard_div" target="true">
+                        <input type="text" class="forWard_input" placeholder="请用一句话评论您所转发的微博">
+                        <button class="forward_btn btn btn-info">转发</button>
+                    </div>
+                    <div class="showSectionReply" style="display: none"></div>
+                    <% if(at.reply_id != null && at.comment_id == null){ %>
+                    <div class="re_content message_re_content">
+                        <div style="margin-bottom: 10px" class="allreply">
+                            <img style="border-radius: 50%;border: 1px solid #ccc" src="<%= at.author_id.avatar %>" alt="">
+                            <p class="re_name"><span><a href="/center/<%= at.author_id.xm %>"><%= at.author_id.xm %></a>：</span><span><%= at.reply_id.content %></span></p>
+                            <span class="re_time"><%= at.reply_id.create_time_ago() %></span>
+                            <p class="re_input">
+                                <span class="cursor reply_slide">回复</span>|
+                                <% if(at.reply_id.likes.length > 0){ %>
+                                <span class="reply_like cursor">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                    <%= at.reply_id.likes.length %>
+                    </span>
+                                <% }else{ %>
+                                <span class="reply_like cursor">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                        赞
+                    </span>
+                                <% } %>
+                            </p><br>
+                            <div class="slide_reply" target="true" style="display: none">
+                                <input type="text" name="target_id" value="<%= at.reply_id._id%>" class="hide">
+                                <input type="text" name="url" value="/question/<%= at.reply_id.question_id %>/comment" class="hide">
+                                <p>
+                                    <input name="" class="reply_input markdown" type="text">
+                                    <button class="reply_btn commentBtn btn bnt-info">评论</button>
+                                </p>
+                                <span class="glyphicon glyphicon-piggy-bank">表情</span>
+                            </div>
+                        </div>
+                        <input type="text" name="allComment" value="<%= at.reply_id._id %>" class="hide">
+                        <% if(at.reply_id.comment_num > 0){%>
+                        <a id="allComment" class="allCommentShow" style="margin-left: 45px" target="true" href="javascript:void(0)"><%= at.reply_id.comment_num %>条回复</a>
+                        <% } %>
+                        <div class="showAllComment" style="display: none"></div>
+                    </div>
+                    <% } %>
+                    <% if(at.comment_id != null){ %>
+                    <div class="re_content message_re_content">
+                        <div style="margin-bottom: 10px" class="allreply">
+                            <img style="border-radius: 50%;border: 1px solid #ccc" src="<%= at.author_id.avatar %>" alt="">
+                            <p class="re_name"><span><a href="/center/<%= at.author_id.xm %>"><%= at.author_id.xm %></a>：</span><span><%= at.reply_id.content %></span></p>
+                            <span class="re_time"><%= at.reply_id.create_time_ago() %></span>
+                            <p class="re_input">
+                                <span class="cursor reply_slide">回复</span>|
+                                <% if(at.reply_id.likes.length > 0){ %>
+                                <span class="reply_like cursor">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                    <%= at.reply_id.likes.length %>
+                    </span>
+                                <% }else{ %>
+                                <span class="reply_like cursor">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                        赞
+                    </span>
+                                <% } %>
+                            </p><br>
+                            <div class="slide_reply" target="true" style="display: none">
+                                <input type="text" name="target_id" value="<%= at.reply_id._id%>" class="hide">
+                                <input type="text" name="url" value="/question/<%= at.reply_id.question_id %>/comment" class="hide">
+                                <p>
+                                    <input name="" class="reply_input markdown" type="text">
+                                    <button class="reply_btn commentBtn btn btn-info">评论</button>
+                                </p>
+                            </div>
+                        </div>
+                        <input type="text" name="allComment" value="<%= at.reply_id._id %>" class="hide">
+                        <% if(at.reply_id.comment_num > 0){%>
+                        <a id="allComment" class="allCommentShow" style="margin-left: 45px" target="true" href="javascript:void(0)"><%= at.reply_id.comment_num %>条回复</a>
+                        <% } %>
+                        <div class="showAllComment" style="display: none"></div>
+                    </div>
+                    <% } %>
+                </div>
+
+                <% }) %>
+            </div>
+            <div class='tab-pane fade' id='tab2'>
+                <div class="reply-content">
+                    <% if(reply == ''){ %>
+                    <div class="noNewMessage">
+                        <a href="/" class="tips">没有新消息</br>去首页看看吧！</a>
+                    </div>
+                    <% }else{ %>
+                    <% reply.forEach(function(reply){ %>
+                    <div class="weibo-content ">
+                        <div class="weibo-content-main">
+                            <div class="weibo-avatar" style="background: url(<%= reply.author_id.avatar %>);background-size: 100% 100%"></div>
+                            <div class="weibo-detail">
+                                <div class="weibo-user-name"><a href="/center/<%= reply.author_id.xm %>"><%= reply.author_id.xm %></a></div>
+                                <div class="weibo-time-ago">
+                                    <%= reply.reply_id.create_time_ago() %>
+                                </div>
+                                <div class="weibo-text">
+                                    回复
+                                    <a href=""><%= reply.target_id.xm %></a>
+                                    <%= reply.reply_id.content %>
+                                </div>
+                                <div class="reply_pre">
+                                    <span>回复我的评论：</span>
+                                    <%= reply.question_id.content %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weibo-content-btn">
+                            <ul class="weibo-content-btn-nav">
+                                <% if(reply.reply_id){ %>
+                                <li class="weibo-btn-relay">
+                                    <a href="/question/<%= reply.question_id._id %>/#<%= reply.reply_id._id %>">
+                                        <i class="fa fa-commenting"></i>
+                                        回复
+                                    </a>
+                                </li>
+                                <% }else{ %>
+                                <li class="weibo-btn-relay">
+                                    <a href="/question/<%= reply.question_id._id %>/#<%= reply.reply_id %>">
+                                        <i class="fa fa-commenting"></i>
+                                        回复
+                                    </a>
+                                </li>
+                                <% } %>
+                                <% if(reply.reply_id.likes.length > 0){ %>
+                                <div class="re_content">
+                                    <input type="text" class="hide" name="target_id" value="<%= reply.reply_id._id %>"></input>
+                                    <li class="reply_like">
+                                        <i class="fa fa-thumbs-o-up"></i>
+                                        <%= reply.reply_id.likes.length %>
+                                    </li>
+                                </div>
+                                <% }else{ %>
+                                <div class="re_content">
+                                    <input type="text" class="hide" name="target_id" value="<%= reply.reply_id._id %>"></input>
+                                    <li class="reply_like">
+                                        <i class="fa fa-thumbs-o-up"></i>
+                                        赞
+                                    </li>
+                                </div>
+                                <% } %>
+                            </ul>
+                        </div>
+                    </div>
+                    <% }) %>
+                    <% } %>
+                    <% replys.forEach(function(reply){ %>
+                    <div class="weibo-content ">
+                        <div class="weibo-content-main">
+                            <div class="weibo-avatar" style="background: url(<%= reply.author_id.avatar %>);background-size: 100% 100%"></div>
+                            <div class="weibo-detail">
+                                <div class="weibo-user-name"><a href="/center/<%= reply.author_id.xm %>"><%= reply.author_id.xm %></a></div>
+                                <div class="weibo-time-ago">
+                                    <%= reply.reply_id.create_time_ago() %>
+                                </div>
+                                <div class="weibo-text">
+                                    回复
+                                    <a href=""><%= reply.target_id.xm %></a>
+                                    <%= reply.reply_id.content %>
+                                </div>
+                                <div class="reply_pre">
+                                    <span>回复我的评论：</span>
+                                    <%= reply.question_id.content %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weibo-content-btn">
+                            <ul class="weibo-content-btn-nav">
+                                <% if(reply.reply_id){ %>
+                                <li class="weibo-btn-relay">
+                                    <a href="/question/<%= reply.question_id._id %>/#<%= reply.reply_id._id %>">
+                                        <i class="fa fa-commenting"></i>
+                                        回复
+                                    </a>
+                                </li>
+                                <% }else{ %>
+                                <li class="weibo-btn-relay">
+                                    <a href="/question/<%= reply.question_id._id %>/#<%= reply.reply_id %>">
+                                        <i class="fa fa-commenting"></i>
+                                        回复
+                                    </a>
+                                </li>
+                                <% } %>
+                                <% if(reply.reply_id.likes.length > 0){ %>
+                                <div class="re_content">
+                                    <input type="text" class="hide" name="target_id" value="<%= reply.reply_id._id %>"></input>
+                                    <li class="reply_like">
+                                        <i class="fa fa-thumbs-o-up"></i>
+                                        <%= reply.reply_id.likes.length %>
+                                    </li>
+                                </div>
+                                <% }else{ %>
+                                <div class="re_content">
+                                    <input type="text" class="hide" name="target_id" value="<%= reply.reply_id._id %>"></input>
+                                    <li class="reply_like">
+                                        <i class="fa fa-thumbs-o-up"></i>
+                                        赞
+                                    </li>
+                                </div>
+                                <% } %>
+                            </ul>
+                        </div>
+                    </div>
+                    <% }) %>
+
+                </div>
+            </div>
+            <div class='tab-pane fade' id='tab3'>
+                <% if(like == ''){ %>
+                <div class="noNewMessage">
+                    <a href="/" class="tips">没有新消息</br>去首页看看吧！</a>
+                </div>
+                <% }else{ %>
+                <% like.forEach(function(like){ %>
+                <div class="like-content">
+                    <div class="weibo-content">
+                        <div class="weibo-content-main">
+                            <div class="weibo-avatar" style="background: url(<%= like.author_id.avatar %>);background-size: 100% 100%"></div>
+                            <div class="weibo-detail">
+                                <div class="weibo-user-name"><a href="/center/<%= like.author_id.xm %>"><%= like.author_id.xm %></a>赞了我的<% if(like.reply_id){ %>评论<% }else{ %>文章<% } %></div>
+                                <div class="weibo-time-ago">123</div>
+                                <div class="reply_pre">
+                                    <span><%= like.target_id.xm %>：</span>
+                                    <% if(like.reply_id){ %>
+                                    <%= like.reply_id.content %>
+                                    <% console.log(like.reply_id.content )%>
+                                    <% }else{ %>
+                                    <%= like.question_id.content %>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weibo-content-btn">
+                            <ul class="weibo-content-btn-nav">
+                                <% if(like.reply_id){ %>
+                                <li class="weibo-btn-relay">
+                                    <a href="/question/<%= like.question_id._id %>/#<%= like.reply_id._id %>">
+                                        <i class="fa fa-commenting"></i>
+                                        回复
+                                    </a>
+                                </li>
+                                <% }else{ %>
+                                <li class="weibo-btn-relay">
+                                    <a href="/question/<%= like.question_id._id %>/#<%= like.reply_id %>">
+                                        <i class="fa fa-commenting"></i>
+                                        回复
+                                    </a>
+                                </li>
+                                <% } %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+                <% } %>
+                <% likes.forEach(function(like){ %>
+                <div class="like-content">
+                    <div class="weibo-content">
+                        <div class="weibo-content-main">
+                            <div class="weibo-avatar" style="background: url(<%= like.author_id.avatar %>);background-size: 100% 100%"></div>
+                            <div class="weibo-detail">
+                                <div class="weibo-user-name"><a href="/center/<%= like.author_id.xm %>"><%= like.author_id.xm %></a>赞了我的<% if(like.reply_id){ %>评论<% }else{ %>文章<% } %></div>
+                                <% console.log (like)%>
+                                <div class="weibo-time-ago"><%= like.create_time_ago() %></div>
+                                <div class="reply_pre">
+                                    <span><%= like.target_id.xm %>：</span>
+                                    <% if(like.reply_id){ %>
+                                    <%= like.reply_id.content %>
+                                    <% }else{ %>
+                                    <%= like.question_id.content %>
+                                    <ul class="weibo-picture">
+                                        <% for(var i= 0;i<like.question_id.imgs.length;i++){ %>
+                                        <li>
+                                            <img src="<%= like.question_id.imgs[i] %>" alt="">
+                                        </li>
+                                        <% } %>
+                                    </ul>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weibo-content-btn">
+                            <ul class="weibo-content-btn-nav">
+                                <% if(like.reply_id){ %>
+                                    <li class="weibo-btn-relay">
+                                        <a href="/question/<%= like.question_id._id %>/#<%= like.reply_id._id %>">
+                                        <i class="fa fa-commenting"></i>
+                                        回复
+                                        </a>
+                                    </li>
+                                <% }else{ %>
+                                    <li class="weibo-btn-relay">
+                                        <a href="/question/<%= like.question_id._id %>/#<%= like.reply_id %>">
+                                        <i class="fa fa-commenting"></i>
+                                        回复
+                                        </a>
+                                    </li>
+                                <% } %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+            <div class='tab-pane fade' id='tab4'>
+                <div class="reply-content">
+                    <% if(comment == ''){ %>
+                    <div class="noNewMessage">
+                        <a href="/" class="tips">没有新消息</br>去首页看看吧！</a>
+                    </div>
+                    <% }else{ %>
+                    <% comment.forEach(function(comment){ %>
+                    <div class="weibo-content">
+                        <div class="weibo-content-main">
+                            <div class="weibo-avatar" style="background: url(<%= comment.author_id.avatar %>);background-size: 100% 100%"></div>
+                            <div class="weibo-detail">
+                                <div class="weibo-user-name"><a href="/center/<%= comment.author_id.xm %>"><%= comment.author_id.xm %></a></div>
+                                <div class="weibo-time-ago">
+                                    <%= comment.reply_id.create_time_ago() %>
+                                </div>
+                                <div class="weibo-text">
+                                    回复
+                                    <a href=""><%= comment.target_id.xm %></a>
+                                    <%= comment.reply_id.content %>
+                                </div>
+                                <div class="reply_pre">
+                                    <span>回复我的评论：</span>
+                                    <%= comment.question_id.content %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weibo-content-btn">
+                            <ul class="weibo-content-btn-nav">
+                                <li class="weibo-btn-relay">
+                                    <i class="fa fa-commenting"></i>
+                                    回复
+                                </li>
+                                <li class="weibo-btn-like">
+                                    <i class="fa fa-thumbs-up"></i>
+                                    赞
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <% }) %>
+                    <% } %>
+                    <% comments.forEach(function(comment){ %>
+                    <div class="weibo-content">
+                        <div class="weibo-content-main">
+                            <div class="weibo-avatar" style="background: url(<%= comment.author_id.avatar %>);background-size: 100% 100%"></div>
+                            <div class="weibo-detail">
+                                <div class="weibo-user-name"><a href="/center/<%= comment.author_id.xm %>"><%= comment.author_id.xm %></a></div>
+                                <div class="weibo-time-ago">
+                                    <%= comment.reply_id.create_time_ago() %>
+                                </div>
+                                <div class="weibo-text">
+                                    回复
+                                    <a href=""><%= comment.target_id.xm %></a>
+                                    <%= comment.reply_id.content %>
+                                </div>
+                                <div class="reply_pre">
+                                    <span>回复我的评论：</span>
+                                    <%= comment.question_id.content %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weibo-content-btn">
+                            <ul class="weibo-content-btn-nav">
+                                <li class="weibo-btn-look">
+                                    <i class="fa fa-comments"></i>
+                                    查看对话
+                                </li>
+                                <li class="weibo-btn-relay">
+                                    <i class="fa fa-commenting"></i>
+                                    回复
+                                </li>
+                                <li class="weibo-btn-like">
+                                    <i class="fa fa-thumbs-up"></i>
+                                    赞
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right-content">
+        <div class="right-content">
+            <div class="right-content-top">
+                使用小帮助
+            </div>
+            <div class="right-content-main">
+                <div class="right-content-question"><i class="fa fa-question-circle"></i>：什么是@？</div>
+                <p><i class="fa fa-at"></i>：在微博中@他人的昵称，如"@马萨伊尔"，他就会收到你@他的提醒。</p>
+                <div class="right-content-question"><i class="fa fa-question-circle"></i>：什么是赞？</div>
+                <p><i class="fa fa-thumbs-up"></i>：在微博中发现喜欢或赞同的内容，就可以为他点赞哦！</p>
+                <div class="right-content-question"><i class="fa fa-question-circle"></i>：什么是评论？</div>
+                <p><i class="fa fa-pencil-square"></i>：想要在已有的微博中发表自己的看法，就可以点击评论按钮！</p>
+            </div>
+        </div>
+    </div>
+</div>

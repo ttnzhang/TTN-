@@ -1,0 +1,36 @@
+<div class="re_content">
+    <div style="margin-bottom: 10px" class="allreply">
+        <img style="border-radius: 50%;border: 1px solid #ccc" src="<%= reply.author.avatar %>" alt="">
+        <p class="re_name"><span><a href="/center/<%= reply.author.xm %>"><%=reply.author.xm %></a>：</span><span><%= reply.content %></span></p>
+        <span class="re_time"><%= reply.create_time_ago() %></span>
+        <p class="re_input" style="margin-right: 10px">
+            <span class="cursor reply_slide">回复</span>|
+            <% if(reply.likes.length > 0){ %>
+            <span class="reply_like cursor">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                <%= reply.likes.length %>
+                    </span>
+            <% }else{ %>
+            <span class="reply_like cursor">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                        赞
+                    </span>
+            <% } %>
+        </p><br>
+        <div class="slide_reply" target="true" style="display: none">
+            <input type="text" name="target_id" value="<%= reply._id%>" class="hide">
+            <input type="text" name="url" value="/question/<%= reply.question_id %>/comment" class="hide">
+            <div style="margin-top: 10px;width: 600px">
+                <input name="" class="reply_input markdown" type="text">
+                <button class="reply_btn commentBtn btn btn-info reply_btnn">评论</button>
+            </div>
+        </div>
+    </div>
+    <input type="text" name="allComment" value="<%= reply._id %>" class="hide">
+    <% if(reply.comment_num > 0){%>
+    <a id="allComment" class="allCommentShow" style="margin-left: 45px" target="true" href="javascript:void(0)"><%= reply.comment_num %>条回复</a>
+    <% }else{ %>
+    <a id="allComment" class="allCommentShow" style="margin-left: 45px" target="true" href="javascript:void(0)">暂无回复</a>
+    <% } %>
+    <div class="showAllComment" style="display: none"></div>
+</div>

@@ -1,0 +1,336 @@
+.content{
+    width: 1000px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    padding-bottom: 20px;
+    background: white;
+}
+.cen_header{
+    width: 1000px;
+    height: 250px;
+    background-image: url("/images/001.jpg");
+    background-repeat:no-repeat;
+    background-size: 1000px 300px;
+    text-align: center;
+}
+.cen_header img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-top: 50px;
+}
+.cen_header h3{
+    margin: 10px 0 0 0;
+}
+.cen_title{
+    width: 1000px;
+    height: 50px;
+    background-color: #fff;
+    text-align: center;
+}
+.cen_title h3{
+    margin: 0;
+    line-height: 50px;
+    font-size: 18px;
+}
+.cen_body_left{
+    width: 300px;
+    display: inline-block;
+}
+.cen_follow ul li{
+    display: inline-block;
+    margin: 20px 0;
+    padding: 0 25px;
+    border-left: 1px solid #ccc;
+    text-align: center;
+}
+.cen_follow ul li:nth-child(1){
+    margin-left: 25px;
+    border-left: none;
+}
+.cen_follow ul li p{
+    margin-bottom: 0;
+}
+.cen_data{
+    width: 300px;
+    text-align: center;
+}
+.cen_data img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+    border: 1px solid #ccc;
+    display: block;
+    margin: 0 auto;
+}
+.cen_data h3 {
+    margin: 10px 20px 0 0;
+    display: inline-block;
+    vertical-align: top;
+}
+.cen_data button{
+    width: 50px;
+    height: 25px;
+    margin-top: 10px;
+}
+.cen_data p{
+    margin: 5px auto;
+    font-size: 14px;
+    width: 150px;
+}
+.cen_body_right {
+    width: 650px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+}
+.weibo-content {
+    margin-top: 20px;
+    border:1px solid #ccc;
+}
+.weibo-content-main {
+    padding: 10px;
+}
+.weibo-content-main:after {
+    clear: both;
+    display: block;
+    content: '';
+}
+.weibo-avatar {
+    width: 70px;
+    height: 70px;
+    background: url("../images/default-avatar.jpg");
+    background-size: 100% 100%;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    display: inline-block;
+}
+.weibo-detail {
+    width: 500px;
+    float: right;
+}
+.weibo-picture {
+    display: block;
+    width: 350px;
+}
+.weibo-picture:after {
+    clear: both;
+    content: " ";
+    display: block;
+}
+.weibo-picture li {
+    margin-right: 2.5%;
+    margin-top: 2.5%;
+    width: 30%;
+    border-radius:3px;
+    overflow:hidden;
+    float: left;
+}
+.weibo-user-name {
+    font-size:16px;
+    font-weight: bold;
+    text-align: left;
+}
+.weibo-time-ago {
+    font-size: 13px;
+    text-align: left;
+}
+.weibo-text {
+    font-size: 15px;
+    text-align: left;
+}
+.weibo-picture li:hover {
+    cursor: pointer;
+}
+.weibo-picture li img {
+    width: 110px;
+    height: 110px;
+}
+.weibo-content-btn-nav {
+    border-top: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+.weibo-content-btn-nav li {
+    text-align: center;
+    width: 100%;
+    border-right: 1px solid #ccc;
+    cursor: pointer;
+}
+.weibo-content-btn-nav li:hover {
+    color: orange;
+}
+.weibo-content-btn-nav li a{
+    color: #000;
+}
+.weibo-content-btn-nav li a:hover{
+    color: orange;
+    text-decoration: none;
+}
+.weibo-content-btn-nav li:nth-of-type(4) {
+    border-right: none;
+}
+#followUser {
+    padding: 0;
+    width: 80px;
+    outline: none;
+}
+.reply{
+    margin-top: 20px;
+}
+.cursor{
+    cursor:pointer;
+}
+.reply img{
+    width: 40px;
+    height: 40px;
+    margin-left: 20px;
+}
+.reply .glyphicon{
+    margin-left: 70px;
+}
+.reply input{
+    width: 500px;
+    height: 30px;
+}
+.reply p{
+    width: 600px;
+    text-align: right;
+}
+.reply p button{
+    margin-right: 50px;
+    width: 70px;
+    height: 25px;
+}
+.reply_content{
+    border-top:1px solid #ccc;
+}
+.reply_content ul li{
+    margin-top: 10px;
+    display: inline-block;
+    padding: 0 20px;
+}
+.reply_content ul li:nth-child(1){
+    border-right: 1px solid #ccc;
+}
+.active{
+    font-weight: bold;
+}
+.re_content {
+    width: 580px;
+    word-break: break-all;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.re_content img{
+    width: 40px;
+    height: 40px;
+    vertical-align: top;
+}
+.re_name {
+    display: inline-block;
+    width: 520px;
+    word-break:break-all
+}
+.re_name a:hover{
+    cursor: pointer;
+    text-decoration: none;
+}
+.reply_input{
+    width: 400px;
+    margin-left: 45px;
+}
+.reply_btn{
+    margin-left: 10px;
+}
+.re_time{
+    margin-left: 45px;
+}
+.re_input{
+    display: inline-block;
+    float: right;
+}
+.re_input span{
+    padding: 0 10px;
+}
+.comment{
+    background-color:rgba(100,100,100,0.2);
+    width: 530px;
+    margin-left: 45px;
+    padding: 10px 0 10px 10px;
+    border-bottom: 1px solid #ccc;
+}
+.co_name {
+    width: 520px;
+    word-break:break-all
+}
+.co_name a:hover{
+    cursor: pointer;
+    text-decoration: none;
+}
+.co_input{
+    display: inline-block;
+    float: right;
+}
+.co_input span{
+    padding: 0 10px;
+}
+.comment_input{
+    margin-left: 30px;
+    width: 350px;
+}
+.comment_btn{
+    margin-left: 10px;
+}
+.showSectionReply {
+    text-align: left;
+}
+.showQuestion{
+    width: 650px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+.showQuestion a{
+    color: black;
+}
+.showQuestion a:hover{
+    color: orange;
+}
+.reply_btnn {
+    width: 70px;
+    height: 25px;
+    padding: 0;
+}
+.re_input{
+    margin-bottom: 0 !important;
+}
+.co_input{
+    margin-bottom: 0 !important;
+}
+.forWard_input{
+    width: 380px;
+    margin: 0 30px;
+}
+.forWard_div{
+    margin: 5px 0;
+    display: none;
+}
+.forWard_content{
+    background: rgba(123,123,123,0.3);
+    margin-top: 10px;
+    padding-top: 5px;
+    text-align: left;
+}
+.forWard_content a{
+    margin-left: 130px;
+}
+.forWard_content p{
+    margin: 5px 0 0 130px;
+}
+.forWard_content .weibo-picture{
+    margin-left: 130px;
+    padding-bottom: 30px;
+}

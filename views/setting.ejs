@@ -1,0 +1,55 @@
+<div class="content" ng-app="settingApp" ng-controller="settingController">
+    <h3>
+        <i class="fa fa-cog" aria-hidden="true"></i>
+        个人设置
+    </h3>
+    <form id="<%= user._id %>" name="settingForm" class="form_setting" ng-submit="postForm()">
+        <div class="setting">
+        <div class="set_img">
+            <div style="display: inline-block">
+                <div class="kv-avatar">
+                    <div class="file-loading">
+                        <input id="avatar" name="avatar" type="file" target="<%= user.avatar %>" required>
+                    </div>
+                </div>
+                <span>请选择jpg、png格式，小于2M的图片（使用高质量图片，可生成高清头像）</span>
+            </div>
+        </div>
+        <div class="set set_login">
+            <span>&nbsp; &nbsp; 登录名：</span><input type="text" value="<%= user.name %>" disabled="disabled">
+        </div>
+        <div class="set set_name">
+            <span>&nbsp; &nbsp; &nbsp; 昵&nbsp; 称：</span><input type="text" value="<%= user.xm %>" name="xm" ng-model="formData.xm" required ng-maxlength="12" ng-minlength="3">
+            <div style="height:20px;margin-left: 50px">
+                <span ng-show="settingForm.xm.$invalid && !settingForm.xm.$pristine" class=" text-danger" ng-cloak>
+                    <i class="fa fa-close"></i>
+                    姓名的长度不能小于3，大于12
+                </span>
+            </div>
+        </div>
+        <div class="set set_sign">
+            <span> 个性签名：</span><input type="text" value="<%= user.motto %>" name="motto" ng-model="formData.motto" required ng-maxlength="20" >
+            <div style="height:20px;margin-left: 50px">
+                <span ng-show="settingForm.motto.$invalid && !settingForm.motto.$pristine" class=" text-danger" ng-cloak>
+                    <i class="fa fa-close"></i>
+                    请正确填写签名内容
+                </span>
+            </div>
+        </div>
+        <div class="set set_job">
+            <span> 职业信息：</span><input type="text" value="<%= user.job %>" name="job" ng-model="formData.job" ng-pattern="/[\u4e00-\u9fa5a-zA-Z0-9]{1,9}$/" required ng-maxlength="8">
+            <div style="height:20px;margin-left: 50px">
+                <span ng-show="settingForm.job.$invalid && !settingForm.job.$pristine" class=" text-danger" ng-cloak>
+                    <i class="fa fa-close"></i>
+                    请正确填写职业信息
+                </span>
+            </div>
+        </div>
+        <button type="submit" ng-disabled="settingForm.$invalid">保存</button>
+    </div>
+    </form>
+</div>
+
+<link rel="stylesheet" href="/plugins/fileinput/css/fileinput.min.css">
+<script src="/plugins/fileinput/js/fileinput.min.js"></script>
+<script src="/plugins/fileinput/js/locales/zh.js"></script>

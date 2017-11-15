@@ -1,0 +1,52 @@
+<div class="reply allreply">
+        <img style="border-radius: 50%;border: 1px solid #ccc" src="<%= user.avatar %>" alt="">
+        <input type="text" class="reply_talk" name="/question/<%= question._id %>/reply">
+        <p><button id="reply_btn" class="btn reply_btnn btn-info">评论</button></p>
+    </div>
+<div class="reply_content" style="padding: 10px 0 0  10px;">
+        <ul class="addReply">
+            <li class="active">按时间</li>
+            <li>按热度</li>
+        </ul>
+        <% replys.forEach(function (replys) { %>
+        <div class="re_content">
+            <div style="margin-bottom: 10px" class="allreply">
+                <img style="border-radius: 50%;border: 1px solid #ccc" src="<%= replys.author.avatar %>" alt="">
+                <p class="re_name"><span><a href="/center/<%= replys.author.xm %>"><%=replys.author.xm %></a>：</span><span><%= replys.content %></span></p>
+                <span class="re_time"><%= replys.create_time_ago() %></span>
+                <p class="re_input" style="margin-right: 10px">
+                    <span class="cursor reply_slide">回复</span>|
+                    <% if(replys.likes.length > 0){ %>
+                    <span class="reply_like cursor">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                        <%= replys.likes.length %>
+                    </span>
+                    <% }else{ %>
+                    <span class="reply_like cursor">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                        赞
+                    </span>
+                    <% } %>
+                </p><br>
+                <div class="slide_reply" target="true" style="display: none">
+                    <input type="text" name="target_id" value="<%= replys._id%>" class="hide">
+                    <input type="text" name="url" value="/question/<%= replys.question_id %>/comment" class="hide">
+                    <div style="margin-top: 10px;width: 600px">
+                        <input name="" class="reply_input markdown" type="text">
+                        <button class="reply_btn commentBtn btn reply_btnn btn-info">评论</button>
+                    </div>
+                </div>
+            </div>
+            <input type="text" name="allComment" value="<%= replys._id %>" class="hide">
+            <% if(replys.comment_num > 0){%>
+            <a id="allComment" class="allCommentShow" style="margin-left: 45px" target="true" href="javascript:void(0)"><%= replys.comment_num %>条回复</a>
+            <% }else{ %>
+            <a id="allComment" class="allCommentShow" style="margin-left: 45px" target="true" href="javascript:void(0)">暂无回复</a>
+            <% } %>
+            <div class="showAllComment" style="display: none"></div>
+        </div>
+        <% }) %>
+    </div>
+<% if(replys.length >= 6 ) { %>
+<div class="showQuestion"><a href="/question/<%= question._id %>">查看更多>></a></div>
+<%  } %>

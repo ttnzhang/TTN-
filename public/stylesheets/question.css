@@ -1,0 +1,332 @@
+.wrapper{
+    min-height: 600px;
+}
+.content{
+    width: 600px;
+    margin: 0 auto;
+    background: white;
+}
+.weibo-content {
+    width: 600px;
+    margin-top: 20px;
+    border:1px solid #ccc;
+}
+.weibo-content-main {
+    padding: 10px;
+}
+.weibo-content-main:after {
+    clear: both;
+    display: block;
+    content: '';
+}
+.weibo-avatar {
+    width: 70px;
+    height: 70px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    display: inline-block;
+}
+.weibo-detail {
+    width: 500px;
+    float: right;
+}
+.weibo-picture {
+    display: block;
+    width: 350px;
+}
+.weibo-picture:after {
+    clear: both;
+    content: " ";
+    display: block;
+}
+.weibo-picture li {
+    margin-right: 2.5%;
+    margin-top: 2.5%;
+    width: 30%;
+    border-radius:3px;
+    overflow:hidden;
+    float: left;
+}
+.weibo-user-name {
+    font-size:16px;
+    font-weight: bold;
+    text-align: left;
+}
+.weibo-time-ago {
+    font-size: 13px;
+    text-align: left;
+}
+.weibo-text {
+    font-size: 15px;
+    text-align: left;
+}
+.weibo-picture li:hover {
+    cursor: pointer;
+}
+.weibo-picture li img {
+    width: 110px;
+    height: 110px;
+}
+.weibo-content-btn-nav {
+    border-top: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+.weibo-content-btn-nav li {
+    text-align: center;
+    width: 100%;
+    border-right: 1px solid #ccc;
+    cursor: pointer;
+}
+.weibo-content-btn-nav li a {
+    color: black;
+}
+.weibo-content-btn-nav li a:hover{
+    color: orange;
+    text-decoration: none;
+}
+.weibo-content-btn-nav li:hover {
+    color: orange;
+}
+.weibo-content-btn-nav li:nth-of-type(4) {
+    border-right: none;
+}
+.reply{
+    margin-top: 20px;
+}
+.cursor{
+    cursor:pointer;
+}
+.reply img{
+    width: 40px;
+    height: 40px;
+    margin-left: 20px;
+}
+.reply .glyphicon{
+    margin-left: 70px;
+}
+.reply input{
+    width: 500px;
+    height: 30px;
+}
+.reply p{
+    width: 600px;
+    text-align: right;
+}
+.reply p button{
+    margin-right: 50px;
+    width: 70px;
+    height: 30px;
+    padding: 0 !important;
+}
+.reply_content{
+    border-top:1px solid #ccc;
+}
+.reply_content ul li{
+    margin-top: 10px;
+    display: inline-block;
+    padding: 0 20px;
+}
+.reply_content ul li:nth-child(1){
+    border-right: 1px solid #ccc;
+}
+.active{
+    font-weight: bold;
+}
+.re_content {
+    width: 600px;
+    word-break: break-all;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.re_content img{
+    width: 40px;
+    height: 40px;
+    vertical-align: top;
+}
+.re_name {
+    display: inline-block;
+    width: 520px;
+    word-break:break-all
+}
+.re_name a:hover{
+    cursor: pointer;
+    text-decoration: none;
+}
+.reply_input{
+    width: 400px;
+    margin-left: 45px;
+}
+.reply_btn{
+    margin-left: 10px;
+}
+.re_time{
+    margin-left: 45px;
+}
+.re_input{
+    display: inline-block;
+    float: right;
+    margin-bottom: 0 !important;
+}
+.re_input span{
+    padding: 0 10px;
+}
+.comment{
+    background-color:rgba(100,100,100,0.2);
+    width: 500px;
+    margin-left: 56px;
+    padding: 10px 0 10px 10px;
+    border-bottom: 1px solid #ccc;
+}
+.allCommentShow{
+    padding-left:10px;
+}
+.co_name {
+    width: 520px;
+    word-break:break-all
+}
+.co_name a:hover{
+    cursor: pointer;
+    text-decoration: none;
+}
+.co_input{
+    display: inline-block;
+    float: right;
+    margin-bottom: 0 !important;
+}
+.co_input span{
+    padding: 0 10px;
+}
+.comment_input{
+    margin-left: 30px;
+    width: 350px;
+}
+.comment_btn{
+    margin-left: 10px;
+}
+.faceBox{
+    display:none;
+    width:372px;
+    height:237px;
+    position:absolute;
+    margin: 45px 0 0 90px;
+    z-index:9999;
+    transition: 2s;
+}
+.faceBox .Corner{
+    display:block;
+    width:28px;
+    height:15px;
+    position:absolute;
+    margin-top: 0px;
+    /*left:45px;
+    top:0; */
+    z-index:100;
+}
+.faceBox .Content{
+    display:block;
+    width:370px;
+    height:215px;
+    padding:10px;
+    background:#ffffff;
+    border:1px solid #cfcfcf;
+    z-index:99;
+    margin:14px 0px 0px 0px;
+    box-shadow:0px 1px 10px rgba(204,204,204,1);
+    border-radius:2px;
+}
+.faceBox .Content h3{
+    margin:0;
+    padding:0;
+    width:350px;
+    height:30px;
+    line-height:26px;
+    display:block;
+    font-size:14px;
+    text-align:left;
+
+}
+.faceBox .Content h3 span{
+    float:left;
+    font:normal 14px/14px 'Microsoft JhengHei','Microsoft YaHei', Arial, sans-serif;
+    color:#333333;
+}
+.faceBox .Content h3 .close{
+    display:inline-block;
+    font-size: 25px;
+    width:16px;
+    height:16px;
+    float:right;
+    cursor:pointer;
+
+}
+.faceBox .Content h3 .close:hover{
+    color: #000;
+}
+.faceBox .Content ul{
+    margin:5px 0px 0px 0px;
+    padding:0;
+    list-style-type:none;
+}
+.faceBox .Content ul li{
+    display:inline-block;
+    width:28px;
+    height:28px;
+    padding:2px;
+    border:1px solid #f8f8f8;
+    float:left;
+}
+.faceBox .Content ul li:hover{
+    border-color:rgb(91,192,222);
+}
+.faceBox .Content ul li a img{
+    width: 22px;
+    height: 22px;
+    margin-left: 0;
+}
+.re_content .glyphicon{
+    margin-left: 50px;
+}
+.re_content .faceBox ul li{
+    margin-top: 0px;
+}
+.re_content .faceBox{
+    margin: 25px 0 0 70px;
+}
+.comment .glyphicon{
+    margin-left: 35px;
+}
+.comment .faceBox{
+    margin-top: 79px;
+}
+.forWard_input{
+    width: 380px;
+    margin: 0 30px;
+}
+.forWard_div{
+    margin: 5px 0;
+    display: none;
+}
+.forWard_content{
+    background: rgba(123,123,123,0.3);
+    margin-top: 10px;
+    padding-top: 5px;
+}
+.forWard_content a{
+    margin-left: 80px;
+}
+.forWard_content p{
+    margin: 5px 0 0 80px;
+}
+.forWard_content .weibo-picture{
+    margin-left: 80px;
+    padding-bottom: 30px;
+}
+.reply_div{
+    width: 600px;
+}
+.re_content .allreply{
+     padding-left: 10px;
+}

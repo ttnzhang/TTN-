@@ -1,0 +1,40 @@
+<div class="content" ng-app="registerApp" ng-controller="registerController">
+    <form name="regForm" ng-submit="postForm()">
+        <div class="center">
+            <img src="../images/logo.png" alt=""><br>
+            <p>账号：<input type="text" id="user" name="name" ng-model="formData.name" ng-minlength="5" ng-maxlength="12" ng-pattern="/^[a-zA-Z0-9_]{4,11}$/" required></p>
+            <p style="height: 20px;font-size: 16px"><span ng-cloak ng-show="regForm.name.$invalid && !regForm.name.$pristine" class="text-danger">
+                <i class="fa fa-warning text-danger"></i>
+                账号格式不正确
+            </span></p>
+            <p>密码：<input type="password" id="pw" name="password" ng-model="formData.password" ng-pattern="/(?!^\\d+$)(?!^[a-zA-Z]+$)(?!^[_#@]+$).{5,}/" ng-maxlength="12" required></p>
+            <p style="height: 20px;font-size: 16px">
+                <span class="text-danger" ng-cloak ng-show="regForm.password.$invalid && !regForm.password.$pristine">
+                <i class="fa fa-warning text-danger"></i>
+                密码格式不正确
+            </span>
+            </p>
+            <p>邮箱：<input type="text" id="emil" name="email" ng-model="formData.email" ng-pattern="/^(\w+)(\.\w+)*@(\w+)((\.\w+))+$/" required></p>
+            <p style="height: 20px;font-size: 16px">
+                <span class="text-danger" ng-cloak ng-show="regForm.email.$invalid && !regForm.email.$pristine">
+                <i class="fa fa-warning text-danger"></i>
+                邮箱格式不正确
+            </span>
+            </p>
+            <div class="checkbox"><input type="checkbox" required><span>同意微博使用协议</span></div>
+            <button ng-disabled="regForm.$invalid" type="submit">立即注册</button>
+            <div class="mod-footer" style="height:40px">
+                <div ng-cloak ng-show="success" id="successbox" class="alert alert-success" role="alert">
+                    {{ success }}
+                </div>
+                <div ng-cloak ng-show="error" id="errorbox" class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            </div>
+            <div class="log_other">
+                <span>已有账号</span><a href="/login">现在前往登录>></a><br>
+            </div>
+        </div>
+    </form>
+
+</div>
